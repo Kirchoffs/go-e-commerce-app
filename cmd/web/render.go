@@ -38,6 +38,7 @@ func (app *application) renderTemplate(w http.ResponseWriter, r *http.Request, p
 
 	_, templateInMap := app.templateCache[templateToRender]
 
+	// When we are in development, we should re-render the file so that we can see the change.
 	if app.config.env == "production" && templateInMap {
 		t = app.templateCache[templateToRender]
 	} else {
@@ -66,8 +67,8 @@ func (app *application) parseTemplate(partials []string, page string, templateTo
 	var err error
 
 	if len(partials) > 0 {
-		for i, x := range partials {
-			partials[i] = fmt.Sprintf("templates/%s.partial.gohtml", x)
+		for i, name := range partials {
+			partials[i] = fmt.Sprintf("templates/%s.partial.gohtml", name)
 		}
 	}
 
