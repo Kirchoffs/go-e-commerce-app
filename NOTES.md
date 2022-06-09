@@ -82,10 +82,12 @@ m, _ := json.MarshalIndent(p, "", "  ")
 fmt.Println(string(m))
 ```
 The output of the above code snippet:  
+```
 {  
-$~~$"x": 1,  
-$~~$"y": 2  
+  "x": 1,  
+  "y": 2  
 }  
+```
 
 ## 2022-05-30
 1. Create a simple project:  
@@ -110,8 +112,8 @@ cmd/web: front end
 3. Package encoding/json
 ```
 type stripePayload struct {
-	Currency string `json:"currency"`
-	Amount   string `json:"amount"`
+    Currency string `json:"currency"`
+    Amount   string `json:"amount"`
 }
 ```
 
@@ -128,29 +130,35 @@ srv := &http.Server{
 }
 
 func (app *application) routes() http.Handler {
-	mux := chi.NewRouter()
-	mux.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"https://*", "http://*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-TOKEN"},
-		AllowCredentials: false,
-		MaxAge:           300, // 300 seconds
-	}))
-	mux.Get("/path/to/endpoint", app.GetEndpoint)
-	return mux
+    mux := chi.NewRouter()
+    mux.Use(cors.Handler(cors.Options{
+        AllowedOrigins:   []string{"https://*", "http://*"},
+        AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-TOKEN"},
+        AllowCredentials: false,
+        MaxAge:           300, // 300 seconds
+    }))
+    mux.Get("/path/to/endpoint", app.GetEndpoint)
+    return mux
 }
+
+import (
+    "github.com/go-chi/chi/v5"
+    "github.com/go-chi/cors"
+)
 
 func (app *application) GetEndpoint(w http.ResponseWriter, r *http.Request) {
-	res := jsonResponse{
-		OK: true,
-	}
+    res := jsonResponse{
+        OK: true,
+    }
 
-	out, err := json.MarshalIndent(res, "", "  ")
-	if err != nil {
-		app.errorLog.Println(err)
-	}
+    out, err := json.MarshalIndent(res, "", "  ")
+    if err != nil {
+        app.errorLog.Println(err)
+    }
 
-	w.Header().Set("Content-Type", "json/application")
-	w.Write(out)
+    w.Header().Set("Content-Type", "json/application")
+    w.Write(out)
 }
 ```
+2. Makefile should named with "Makefile" or "makefile"
