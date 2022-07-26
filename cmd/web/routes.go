@@ -1,13 +1,13 @@
 package main
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/go-chi/chi/v5"
+    "github.com/go-chi/chi/v5"
 )
 
 func (app *application) routes() http.Handler {
-	mux := chi.NewRouter()
-	mux.Get("/virtual-terminal", app.VirtualTerminal)
-	return mux
+    mux := chi.NewRouter()
+    mux.Get("/virtual-terminal", app.VirtualTerminal)
+    return mux
 }

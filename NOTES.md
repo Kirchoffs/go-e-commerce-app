@@ -161,4 +161,15 @@ func (app *application) GetEndpoint(w http.ResponseWriter, r *http.Request) {
     w.Write(out)
 }
 ```
-2. Makefile should named with "Makefile" or "makefile"
+2. Makefile should be named with "Makefile" or "makefile"
+
+## 2023-04-20
+```
+>> go mod tidy
+```
+
+The go mod tidy command is used to clean up and optimize the Go module dependencies in a project.
+
+When you use external packages in a Go project, you typically specify them in your project's go.mod file, along with their version numbers. However, as you add and remove dependencies, your go.mod file can become cluttered with unused packages, and versions of packages that are no longer needed.
+
+go mod tidy cleans up your go.mod file by removing any unused or unnecessary dependencies, and updating the version numbers of the packages that you are using to the latest compatible version. It does this by analyzing your code and looking for the packages that are actually being used in your project, and removing any that are not needed.
